@@ -39,5 +39,31 @@ export const demoData = [
       { id: "py-vscode", name: "VS Code", description: "Редактор коду.", category: "Софт", dependencies: [] },
       { id: "py-ext-python", name: "Python Extension", description: "Розширення Python для VS Code.", category: "Розширення", dependencies: ["py-vscode"] }
     ]
+  },
+  {
+    id: "devops",
+    name: "DevOps Stack",
+    description: "Інструменти для автоматизації розгортання та управління інфраструктурою.",
+    tools: [
+      { id: "do-git", name: "Git", description: "Система контролю версій.", category: "Софт", dependencies: [] },
+      { id: "do-docker", name: "Docker", description: "Контейнеризація застосунків.", category: "Софт", dependencies: [] },
+      { id: "do-k8s", name: "kubectl", description: "CLI для управління Kubernetes. Вимагає Docker.", category: "CLI Команди", dependencies: ["do-docker"] },
+      { id: "do-terraform", name: "Terraform", description: "Інструмент для Infrastructure as Code (IaC).", category: "CLI Команди", dependencies: [] },
+      { id: "do-aws", name: "AWS CLI", description: "Командний рядок для Amazon Web Services.", category: "CLI Команди", dependencies: [] },
+      { id: "do-vscode", name: "VS Code", description: "Редактор коду.", category: "Софт", dependencies: [] },
+      { id: "do-ext-tf", name: "Terraform Extension", description: "Розширення Terraform для VS Code.", category: "Розширення", dependencies: ["do-vscode"] }
+    ]
+  },
+  {
+    id: "golang",
+    name: "Go (Golang) Stack",
+    description: "Ефективна розробка мікросервісів та бекенду мовою Go.",
+    tools: [
+      { id: "go-git", name: "Git", description: "Система контролю версій.", category: "Софт", dependencies: [] },
+      { id: "go-sdk", name: "Go SDK", description: "Компілятор та інструменти мови Go.", category: "Софт", dependencies: [] },
+      { id: "go-docker", name: "Docker", description: "Контейнеризація мікросервісів.", category: "Софт", dependencies: [] },
+      { id: "go-vscode", name: "VS Code", description: "Редактор коду.", category: "Софт", dependencies: [] },
+      { id: "go-ext", name: "Go Extension", description: "Офіційне розширення Go для VS Code.", category: "Розширення", dependencies: ["go-vscode", "go-sdk"] }
+    ]
   }
 ];
