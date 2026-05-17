@@ -87,7 +87,7 @@ function renderStackSelector() {
 function getCurrentTools() {
     const stack = demoData.find(s => s.id === state.activeStackId);
     if (!stack) return [];
-    
+
     const custom = state.customSteps[state.activeStackId] || [];
     return [...stack.tools, ...custom];
 }
@@ -96,14 +96,14 @@ function getCurrentTools() {
 function areDependenciesMet(toolId, tools) {
     const tool = tools.find(t => t.id === toolId);
     if (!tool || !tool.dependencies || tool.dependencies.length === 0) return true;
-    
+
     return tool.dependencies.every(depId => state.progress[depId] === true);
 }
 
 function getMissingDependencies(toolId, tools) {
     const tool = tools.find(t => t.id === toolId);
     if (!tool || !tool.dependencies) return [];
-    
+
     return tool.dependencies
         .filter(depId => !state.progress[depId])
         .map(depId => {
@@ -120,25 +120,25 @@ function renderChecklist() {
 
     // Filter tools
     let filteredTools = allTools;
-    
+
     if (state.searchQuery) {
         const query = state.searchQuery.toLowerCase();
-        filteredTools = filteredTools.filter(t => 
-            t.name.toLowerCase().includes(query) || 
+        filteredTools = filteredTools.filter(t =>
+            t.name.toLowerCase().includes(query) ||
             t.description.toLowerCase().includes(query)
         );
     }
-    
+
     if (state.categoryFilter !== 'Всі') {
         filteredTools = filteredTools.filter(t => t.category === state.categoryFilter);
     }
 
     checklistContainer.innerHTML = '';
-    
+
     // Update stats
     const totalCount = allTools.length;
     const completedCount = allTools.filter(t => state.progress[t.id]).length;
-    
+
     totalCountEl.textContent = totalCount;
     completedCountEl.textContent = completedCount;
     progressBarEl.style.width = totalCount === 0 ? '0%' : `${(completedCount / totalCount) * 100}%`;
@@ -148,7 +148,7 @@ function renderChecklist() {
         emptyState.classList.remove('hidden');
     } else {
         emptyState.classList.add('hidden');
-        
+
         filteredTools.forEach(tool => {
             const isChecked = !!state.progress[tool.id];
             const isLocked = !isChecked && !areDependenciesMet(tool.id, allTools);
@@ -157,7 +157,7 @@ function renderChecklist() {
 
             const card = document.createElement('div');
             card.className = `tool-card ${isChecked ? 'checked' : ''} ${isLocked ? 'locked' : ''}`;
-            
+
             card.innerHTML = `
                 <label class="checkbox-wrapper">
                     <input type="checkbox" id="${tool.id}" ${isChecked ? 'checked' : ''} ${isLocked ? 'disabled' : ''}>
@@ -195,7 +195,7 @@ function renderChecklist() {
 // Event Listeners Setup
 function setupEventListeners() {
     themeToggle.addEventListener('click', toggleTheme);
-    
+
     resetBtn.addEventListener('click', () => {
         if (confirm('Ви впевнені, що хочете скинути весь прогрес і видалити кастомні кроки?')) {
             localStorage.removeItem('devenv_state');
@@ -225,7 +225,7 @@ function setupEventListeners() {
         const nameInput = document.getElementById('step-name');
         const descInput = document.getElementById('step-desc');
         const catInput = document.getElementById('step-cat');
-        
+
         const name = nameInput.value.trim();
         if (name.length < 3) return;
 
@@ -242,7 +242,7 @@ function setupEventListeners() {
         }
         state.customSteps[state.activeStackId].push(newTool);
         saveState();
-        
+
         nameInput.value = '';
         descInput.value = '';
         renderChecklist();
