@@ -1,35 +1,40 @@
-# KPI 2026 GitHub Pages App Template
+# DevEnv Checklist
 
-Starter repository for small coursework web applications that are implemented from existing markdown requirements and deployed to GitHub Pages.
+Вебзастосунок «Чекліст налаштування середовища розробки» призначений для автоматизації та систематизації процесу підготовки робочого простору інженера-програмніста.
 
-## Intended use
+## Функціонал
+- **Три стеки:** Frontend, Node.js, Python.
+- **Трекінг прогресу:** Відмічайте виконані кроки, прогрес зберігається у `localStorage`.
+- **Залежності:** Деякі кроки заблоковані, поки не виконано базові.
+- **Кастомні кроки:** Додавайте власні інструменти до кожного стеку.
+- **Пошук та фільтри:** Легко знаходьте потрібні інструменти.
+- **Світла/Темна тема:** Застосунок підтримує дві теми.
 
-Use this repository as a template for:
-- the teacher's demo application;
-- student repositories created after requirements are already written;
-- small GitHub Pages projects that must stay within static hosting constraints.
+## Технічний стек
+- Plain HTML5
+- Vanilla CSS3 (Custom Properties)
+- Vanilla ES6 JavaScript (ES Modules)
+- Зберігання даних: `localStorage`
 
-## Suggested workflow
+## Як запустити локально
+Оскільки застосунок використовує ES модулі (`<script type="module">`), його потрібно запускати через локальний сервер (через CORS обмеження браузера для `file://`).
 
-1. Create a new repository from this template.
-2. Add the project requirements as markdown under `requirements/`.
-3. Invoke the `requirements-to-github-pages` skill inside the new repository.
-4. Let the skill:
-   - assess feasibility;
-   - choose the simplest viable stack;
-   - document SDRs;
-   - implement the app;
-   - add demo data and reset flow;
-   - update deployment files.
+Використовуйте будь-який локальний сервер, наприклад:
+```bash
+npx serve .
+```
+Або за допомогою Python:
+```bash
+python -m http.server
+```
 
-## Initial repository structure
+## Розгортання (GitHub Pages)
+Цей проєкт налаштований для автоматичного деплою на GitHub Pages за допомогою GitHub Actions.
+1. Запуште код у гілку `main`.
+2. Переконайтеся, що в налаштуваннях репозиторію **Settings -> Pages -> Source** вибрано **GitHub Actions**.
 
-- `requirements/` - place the markdown requirements here
-- `docs/sdr/` - software decision records
-- `data/` - seed and demo data if needed
-- `.github/workflows/` - GitHub Pages deployment workflow
-
-## Notes
-
-This repository is intentionally minimal. It is not a finished application.
-It is a clean starting point for projects that will be generated from existing requirements.
+## Документація (SDR)
+Архітектурні рішення описані у папці `docs/sdr/`:
+- `0001-stack-choice.md`
+- `0002-client-storage-choice.md`
+- `0003-routing-state-and-data-model.md`
